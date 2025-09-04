@@ -12,8 +12,6 @@ import { motion } from "framer-motion";
 
 export const Home = () => {
   const navigate = useNavigate();
-  const name = 'Alice';
-  const age = 30;
 
   useEffect(() => {
     AOS.init({
