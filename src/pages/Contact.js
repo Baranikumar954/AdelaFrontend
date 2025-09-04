@@ -5,8 +5,8 @@ import contactImage from '../media/contactTemplate.jpg' // adjust path if needed
 import AOS from "aos"
 import "aos/dist/aos.css"
 import api from '../util/AxiosConfig'
-import { Mail, Phone, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
-
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -192,113 +192,74 @@ export const Contact = () => {
       </section>
  
       <section className="bg-gradient-to-r from-indigo-50 via-white to-indigo-50 py-20 px-6 md:px-20">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Title */}
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-12 text-center">
-            <span className="text-indigo-600">Contact Information</span>
-          </h2>
+      <div className="max-w-7xl mx-auto">
+        {/* Section Title */}
+        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-12 text-center">
+          <span className="text-indigo-600">Contact Information</span>
+        </h2>
 
-          {/* Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            
-            {/* Address */}
-            <div
-              data-aos="fade-up"
-              className="bg-white shadow-lg rounded-2xl p-8 hover:shadow-xl transition"
-            >
-              <h3 className="text-xl font-semibold text-black mb-4">Our Office</h3>
-              <p className="text-gray-700 leading-relaxed">
-                <span className="font-semibold">Adela Softwares & Services Pvt Ltd</span> <br />
-                1, 1, Major Saravanan Rd, Cantonment, <br />
-                Tiruchirappalli, Tamil Nadu 620001
-              </p>
-            </div>
-
-            {/* Phone & Email */}
-            <div
-              data-aos="fade-up"
-              data-aos-delay="150"
-              className="bg-white shadow-lg rounded-2xl p-8 hover:shadow-xl transition"
-            >
-              <h3 className="text-xl font-semibold text-black mb-4">Get in Touch</h3>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <Phone className="text-indigo-600 w-6 h-6" />
-                  <span className="text-gray-800">0431 241 1341</span>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Mail className="text-indigo-600 w-6 h-6 mt-1" />
-                  <div className="flex flex-col">
-                    <a
-                      href="mailto:info@adelasoftwares.com"
-                      className="text-gray-800 hover:text-indigo-600 transition"
-                    >
-                      info@adelasoftwares.com
-                    </a>
-                    <a
-                      href="mailto:support@adelasoftwares.com"
-                      className="text-gray-800 hover:text-indigo-600 transition"
-                    >
-                      support@adelasoftwares.com
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Business Hours & Socials */}
-            <div
-              data-aos="fade-up"
-              data-aos-delay="300"
-              className="bg-white shadow-lg rounded-2xl p-8 hover:shadow-xl transition"
-            >
-              <h3 className="text-xl font-semibold text-black mb-4">Business Hours</h3>
-              <p className="text-gray-700 mb-6">
-                Mon – Fri: <span className="font-semibold">9:00 AM – 7:00 PM</span> <br />
-                Sat & Sun: <span className="font-semibold">Closed</span> <br />
-                (Support via email)
-              </p>
-
-              {/* Social Links */}
-              <h4 className="text-lg font-semibold text-gray-900 mb-3">Follow Us</h4>
-              <div className="flex space-x-5">
-                <a
-                  href="https://www.linkedin.com/company/adela-softwares"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-indigo-600 hover:scale-110 transition"
-                >
-                  <Linkedin className="w-6 h-6" />
-                </a>
-                <a
-                  href="https://twitter.com/adela"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-indigo-600 hover:scale-110 transition"
-                >
-                  <Twitter className="w-6 h-6" />
-                </a>
-                <a
-                  href="https://facebook.com/adela"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-indigo-600 hover:scale-110 transition"
-                >
-                  <Facebook className="w-6 h-6" />
-                </a>
-                <a
-                  href="https://instagram.com/adela"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-indigo-600 hover:scale-110 transition"
-                >
-                  <Instagram className="w-6 h-6" />
-                </a>
-              </div>
-            </div>
+        {/* Grid Layout - 4 Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          
+          {/* Location */}
+          <div
+            data-aos="fade-up"
+            className="bg-white shadow-lg rounded-2xl p-8 hover:shadow-xl transition text-center"
+          >
+            <MapPin className="w-10 h-10 text-indigo-600 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-indigo-600 mb-2">Visit Us At</h3>
+            <p className="text-gray-700">
+              1, 1, Major Saravanan Rd, <br />
+              Cantonment, Trichy, <br />
+              Tamil Nadu – 620001
+            </p>
           </div>
+
+          {/* Phone */}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="100"
+            className="bg-white shadow-lg rounded-2xl p-8 hover:shadow-xl transition text-center"
+          >
+            <Phone className="w-10 h-10 text-indigo-600 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-indigo-600 mb-2">Call Us On</h3>
+            <p className="text-gray-700">
+              Tel: 0431 241 1341 <br />
+              Mob: +91 98765 43210
+            </p>
+          </div>
+
+          {/* Email */}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="200"
+            className="bg-white shadow-lg rounded-2xl p-8 hover:shadow-xl transition text-center"
+          >
+            <Mail className="w-10 h-10 text-indigo-600 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-indigo-600 mb-2">Mail Address</h3>
+            <p className="text-gray-700">
+              info@adelasoftwares.com <br />
+              support@adelasoftwares.com
+            </p>
+          </div>
+
+          {/* Office Hours */}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="300"
+            className="bg-white shadow-lg rounded-2xl p-8 hover:shadow-xl transition text-center"
+          >
+            <Clock className="w-10 h-10 text-indigo-600 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-indigo-600 mb-2">Opening Time</h3>
+            <p className="text-gray-700">
+              Mon – Fri: 9:00 AM – 7:00 PM <br />
+              Sat & Sun: Closed
+            </p>
+          </div>
+
         </div>
-      </section>
+      </div>
+    </section>
             
       {/* Google Map Section */}
       <section className="bg-white py-16 px-6 md:px-20">
@@ -328,6 +289,57 @@ export const Contact = () => {
         </div>
       </section>
 
+      {/* Follow Us Section */}
+      <section className="bg-gradient-to-r from-indigo-50 via-white to-indigo-50 py-6 px-4 md:px-12">
+  <div className="max-w-7xl mx-auto text-center">
+    <h2
+      className="text-xl md:text-2xl font-bold text-gray-800 mb-4"
+      data-aos="fade-up"
+    >
+      Follow Us
+    </h2>
+
+    {/* Social Icons */}
+    <div
+      className="flex justify-center space-x-4 md:space-x-6"
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      <a
+        href="https://www.linkedin.com/company/adela-softwares"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-gray-800 hover:text-indigo-600 transition transform hover:scale-105"
+      >
+        <Linkedin className="w-5 h-5 md:w-6 md:h-6" />
+      </a>
+      <a
+        href="https://twitter.com/adela"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-gray-800 hover:text-indigo-600 transition transform hover:scale-105"
+      >
+        <Twitter className="w-5 h-5 md:w-6 md:h-6" />
+      </a>
+      <a
+        href="https://facebook.com/adela"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-gray-800 hover:text-indigo-600 transition transform hover:scale-105"
+      >
+        <Facebook className="w-5 h-5 md:w-6 md:h-6" />
+      </a>
+      <a
+        href="https://instagram.com/adela"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-gray-800 hover:text-indigo-600 transition transform hover:scale-105"
+      >
+        <Instagram className="w-5 h-5 md:w-6 md:h-6" />
+      </a>
+    </div>
+  </div>
+</section>
 
 
       <Footer />
