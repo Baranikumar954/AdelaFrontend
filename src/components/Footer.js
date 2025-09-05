@@ -12,15 +12,22 @@ export const Footer = () => {
 
         {/* 🔹 Navigation Links */}
         <div className="flex flex-col sm:flex-row gap-4 text-sm font-medium">
-          <a href="/about" className="text-gray-600 hover:text-indigo-600 transition-colors duration-300">
-            About Us
-          </a>
-          <a href="/contact" className="text-gray-600 hover:text-indigo-600 transition-colors duration-300">
-            Contact Us
-          </a>
-          <a href="/careers" className="text-gray-600 hover:text-indigo-600 transition-colors duration-300">
-            Careers
-          </a>
+          {[
+            { name: "About Us", href: "/aboutus" },
+            { name: "Contact Us", href: "/contactus" },
+            { name: "Careers", href: "/careers" }
+          ].map((link, idx) => (
+            <a
+              key={idx}
+              href={link.href}
+              className="relative text-gray-600 hover:text-indigo-600 transition-colors duration-300 
+                         after:absolute after:left-1/2 after:-bottom-1 after:h-[2px] after:w-0 
+                         after:bg-indigo-600 after:transition-all after:duration-300 
+                         hover:after:w-full hover:after:left-0"
+            >
+              {link.name}
+            </a>
+          ))}
         </div>
 
         {/* 🔹 Divider */}

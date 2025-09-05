@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, {useState, useEffect } from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import hereImage from '../media/homePageRhsImg.jfif'
@@ -20,28 +20,11 @@ export const Home = () => {
       offset: 120,
     });
   }, []);
-//  useEffect(() => {
-//     api.get('/data', {
-//       params: { name, age }
-//     })
-//     .then(response => {
-//       console.log('Response from Flask:', response.data);
-//       alert(response.data.reply);
-//     })
-//     .catch(error => {
-//       // axios errors might have response data or message
-//       if (error.response) {
-//         console.error('Server error:', error.response.data);
-//       } else {
-//         console.error('Error:', error.message);
-//       }
-//     });
-//   }, []);
   
   return (
     <div>
         <Header/>
-        <div className="w-full">
+        <div id='homeHeroSection' className="w-full">
           <section className="p-0 relative w-full min-h-screen flex flex-col md:flex-row items-center overflow-hidden">
 
             {/* 🔸 Mobile View: Responsive Image Background with Text Overlaid */}
@@ -68,7 +51,7 @@ export const Home = () => {
                   <div className="flex space-x-4">
                     <button
                       onClick={() => {
-                        navigate("/contact");
+                        navigate("/contactus");
                       }}
                       className="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition"
                     >
@@ -92,6 +75,9 @@ export const Home = () => {
                 <div className="flex space-x-4">
                   <button onClick={()=>{navigate("/contactus")}} className="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition">
                     Get in
+                  </button>
+                  <button onClick={()=>{navigate("/careers#opportunities")}} className="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition">
+                    Join Us
                   </button>
                   {/* <button className="text-indigo-600 hover:underline">
                     Watch Video
@@ -414,56 +400,57 @@ export const Home = () => {
         </section>
 
         {/* ⭐ Call To Action Section */}
-<section className="relative bg-gradient-to-r from-indigo-50 via-white to-indigo-50 py-20 px-6 md:px-20" id="cta">
-  <div 
-    className="max-w-4xl mx-auto text-center" 
-    data-aos="zoom-in" 
-    data-aos-duration="1000" 
-    data-aos-once="true"
-  >
-    {/* Heading */}
-    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-      Ready to take your business to the <span className="text-indigo-600">next level?</span>
-    </h2>
-    
-    {/* Subtitle */}
-    <p 
-      className="text-lg text-gray-700 mb-8"
-      data-aos="fade-up" 
-      data-aos-delay="200"
-    >
-      Get in touch with us today! Explore our innovative software solutions or schedule a personalized demo.
-    </p>
-    
-    {/* Buttons */}
-    <div 
-      className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-      data-aos="fade-up" 
-      data-aos-delay="400"
-    >
-      {/* Contact Button */}
-      <button
-        onClick={() => navigate("/contactus")}
-        className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 transition-transform transform hover:scale-105 duration-300"
-      >
-        Contact Us
-      </button>
+        <section className="relative bg-gradient-to-r from-indigo-50 via-white to-indigo-50 py-20 px-6 md:px-20" id="cta">
+          <div 
+            className="max-w-4xl mx-auto text-center" 
+            data-aos="zoom-in" 
+            data-aos-duration="1000" 
+            data-aos-once="true"
+          >
+            {/* Heading */}
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+              Ready to take your business to the <span className="text-indigo-600">next level?</span>
+            </h2>
+            
+            {/* Subtitle */}
+            <p 
+              className="text-lg text-gray-700 mb-8"
+              data-aos="fade-up" 
+              data-aos-delay="200"
+            >
+              Get in touch with us today! Explore our innovative software solutions or schedule a personalized demo.
+            </p>
+            
+            {/* Buttons */}
+            <div 
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              data-aos="fade-up" 
+              data-aos-delay="400"
+            >
+              {/* Contact Button */}
+              <button
+                onClick={() => navigate("/contactus")}
+                className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 transition-transform transform hover:scale-105 duration-300"
+              >
+                Contact Us
+              </button>
 
-      {/* Services Button */}
-      <button
-        onClick={() => navigate("/services")}
-        className="px-8 py-3 bg-white text-indigo-600 border-2 border-indigo-600 font-semibold rounded-xl shadow-md hover:bg-indigo-50 transition-transform transform hover:scale-105 duration-300"
-      >
-        View Our Services
-      </button>
-    </div>
-  </div>
+              {/* Services Button */}
+              <button
+                onClick={() => navigate("/services")}
+                className="px-8 py-3 bg-white text-indigo-600 border-2 border-indigo-600 font-semibold rounded-xl shadow-md hover:bg-indigo-50 transition-transform transform hover:scale-105 duration-300"
+              >
+                View Our Services
+              </button>
+            </div>
+          </div>
 
-  {/* Subtle background floating animation */}
-  <div className="absolute top-0 left-0 w-40 h-40 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-  <div className="absolute bottom-10 right-10 w-56 h-56 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-</section>
+          {/* Subtle background floating animation */}
+          <div className="absolute top-0 left-0 w-40 h-40 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+          <div className="absolute bottom-10 right-10 w-56 h-56 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        </section>
 
+        
 
 
     </div>

@@ -47,7 +47,7 @@ export const Contact = () => {
       <Header />
 
       {/* Hero Contact Section */}
-      <section className="relative w-full h-[50vh] md:h-[70vh] flex items-center justify-center">
+      <section id='contactHereSection' className="relative w-full h-[50vh] md:h-[70vh] flex items-center justify-center">
         {/* Background Image */}
         <img
           src={contactImage}
