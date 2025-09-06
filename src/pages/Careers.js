@@ -11,63 +11,63 @@ import supportTeam from '../media/supportTeam.jpg'
 
 export default function Careers() {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({
-    fullName: "",
+  const initialFormState = {
+    name: "",
     email: "",
-    phone: "",
+    phone_number: "",
+    job_position: "",
+    cover_letter: "",
     resume: null,
-  });
+  };
+
+const [formData, setFormData] = useState(initialFormState);
 
   const [status, setStatus] = useState(""); // ✅ for success/failure message
 
   // Handle text/email/phone inputs
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // Handle file input
-   const [fileName, setFileName] = useState("");
-
-  const handleFileChange = (e) => {
-    if (e.target.files.length > 0) {
-      setFileName(e.target.files[0].name);
+    const { name, value, files } = e.target;
+    if (files) {
+      setFormData({ ...formData, [name]: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
     }
   };
 
-  // Handle submit
+  const handleFileChange = (e) => {
+  if (e.target.files.length > 0) {
+    const file = e.target.files[0];
+    setFileName(file.name);
+    setFormData({ ...formData, resume: file }); // <-- this line was missing
+  }
+};
+  // Handle file input
+   const [fileName, setFileName] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Prepare form data for file upload
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("email", formData.email);
+    data.append("phone_number", formData.phone_number);
+    data.append("job_position", formData.job_position);
+    data.append("cover_letter", formData.cover_letter);
+    data.append("resume", formData.resume);
+
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("fullName", formData.fullName);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("phone", formData.phone);
-      formDataToSend.append("resume", formData.resume);
-
-      const response = await fetch("http://127.0.0.1:5000/apply", {
-        method: "POST",
-        body: formDataToSend,
+      const res = await api.post("/careers", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-
-      if (response.ok) {
-        setStatus("✅ Application submitted successfully!");
-        setFormData({
-          fullName: "",
-          email: "",
-          phone: "",
-          resume: null,
-        });
-      } else {
-        setStatus("❌ Failed to submit. Please try again.");
-      }
-    } catch (error) {
-      console.error(error);
-      setStatus("⚠️ Something went wrong. Try again later.");
+      alert(res.data.message);
+      setFormData(initialFormState);
+      setFileName("");
+    } catch (err) {
+      console.error(err);
+      alert("Error submitting application");
     }
   };
 
@@ -438,16 +438,22 @@ const item = {
             <span className="text-indigo-600">24 Hrs</span>
           </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5" method='POST'>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 type="text"
-                placeholder="Your Name *"
+                name="name"
+                placeholder="Your Name"
+                onChange={handleChange}
                 className="w-full p-3 border-b border-gray-300 focus:outline-none focus:border-indigo-600 transition"
+                required
               />
               <input
                 type="email"
-                placeholder="Your Email *"
+                name='email'
+                placeholder="Your Email"
+                onChange={handleChange}
+                required
                 className="w-full p-3 border-b border-gray-300 focus:outline-none focus:border-indigo-600 transition"
               />
             </div>
@@ -455,34 +461,61 @@ const item = {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 type="text"
-                placeholder="Mobile Number *"
+                name='phone_number'
+                placeholder="Your Mobile Number"
+                onChange={handleChange}
+                required
                 className="w-full p-3 border-b border-gray-300 focus:outline-none focus:border-indigo-600 transition"
               />
-              <input
+              <select
+                name="job_position"
+                id="jobPosition"
+                required
+                onChange={handleChange} 
+                defaultValue=""
+                className="w-full p-3 border-b border-gray-300 focus:outline-none focus:border-indigo-600 transition text-gray-400 [&:not(:placeholder-shown)]:text-black"
+              >
+                {/* Placeholder */}
+                <option value="" disabled hidden>
+                  Job Position
+                </option>
+
+                {/* Real options */}
+                <option value="Software Engineer">Software Engineer</option>
+                <option value="Mobile Developer">Mobile Developer</option>
+                <option value="AI & Data Science">AI & Data Science</option>
+                <option value="UI / UX Designers">UI / UX Designers</option>
+                <option value="Quality Assurance">Quality Assurance</option>
+              </select>
+
+              {/* <input
                 type="text"
                 placeholder="Job Position *"
                 className="w-full p-3 border-b border-gray-300 focus:outline-none focus:border-indigo-600 transition"
-              />
+              /> */}
             </div>
 
             <textarea
               rows="4"
+              name='cover_letter'
               placeholder="Cover letter"
+              onChange={handleChange}
+              required
               className="w-full p-3 border-b border-gray-300 focus:outline-none focus:border-indigo-600 transition"
             ></textarea>
 
             {/* File Upload */}
             <div className="flex flex-col sm:flex-row items-center gap-4">
-      <label className="relative flex items-center justify-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white font-medium rounded-lg shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 transition duration-300">
-        <input type="file" className="hidden" onChange={handleFileChange} />
-        <span>📂 Upload Resume</span>
-      </label>
+              <label className="relative flex items-center justify-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white font-medium rounded-lg shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 transition duration-300">
+                <input type="file" accept='pdf' name="resume" className="hidden" onChange={handleFileChange} />
+                <span>📂 Upload Resume</span>
+              </label>
 
-      {/* Show uploaded file name or fallback */}
-      <span className="text-gray-600 text-sm font-medium truncate max-w-[200px]">
-        {fileName ? fileName : "Supported: PDF, DOCX"}
-      </span>
-    </div>
+              {/* Show uploaded file name or fallback */}
+              <span className="text-gray-600 text-sm font-medium truncate max-w-[200px]">
+                {fileName ? fileName : "Supported: PDF, DOCX"}
+              </span>
+            </div>
 
             {/* Submit Button */}
             <button
